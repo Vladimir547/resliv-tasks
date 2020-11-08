@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>domain 1</title>
+</head>
+
+<body>
+    <iframe src="http://abiding-paint.surge.sh" frameborder="0"></iframe>
+    <script>
+        window.onload = function() {
+            const win = document.querySelector('iframe').contentWindow;
+            win.postMessage(JSON.stringify({key: 'storage', method: "set", data: {message:"message"}}), "http://abiding-paint.surge.sh");
+            win.postMessage(JSON.stringify({key: 'storage', method: "get", data: {message:"message"}}), "http://abiding-paint.surge.sh");
+            win.postMessage(JSON.stringify({key: 'storage', method: "remove", data: {message:"message"}}), "http://abiding-paint.surge.sh");
+            window.onmessage = function(e) {
+                let payload = JSON.parse(e.data)
+                console.log(payload);
+            }
+        }
+    </script>
+</body>
+    
+</html>

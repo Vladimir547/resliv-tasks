@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>domain 2</title>
+</head>
+
+<body>
+    <h1>hello, from second domain</h1>
+    <script>
+        let crossMessage = (method) => {
+            console.log(`${method}: callback`);
+        }
+        window.onmessage = function (event) {
+            if (event.origin !== 'http://periodic-brick.surge.sh') {
+                console.error('origin is bad');
+                return;
+            }
+            console.log('origin is good!');
+
+        let payload = JSON.parse(event.data);
+            if (payload.method === 'set') {
+                localStorage.setItem(payload.key, JSON.stringify(payload.data));
+                console.log('written');
+                crossMessage(payload.method);
+            }
+            if (payload.method === 'get') {
+                let storage = localStorage.getItem(payload.key);
+                var parent = window.parent;
+                console.log(storage);
+                console.log('get');
+                parent.postMessage(storage, "http://periodic-brick.surge.sh");
+                crossMessage(payload.method);
+            } 
+            if (payload.method === 'remove') {
+                let storage = localStorage.removeItem(payload.key);
+                console.log('removed');
+                crossMessage(payload.method);
+            } 
+    }
+    </script>
+</body>
+    
+</html>
