@@ -1,0 +1,16 @@
+.button-item {
+    font-size: 15px;
+    padding: 10px 20px;
+    background: palevioletred;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+.button-item:hover {
+ background: burlywood;
+}
+.button-item:focus {
+    outline:none;
+    background: burlywood;
+}

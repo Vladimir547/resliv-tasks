@@ -1,0 +1,14 @@
+.input{
+    border-radius: 13px;
+    border: 2px solid fuchsia;
+    padding: 5px 5px 5px 10px;
+    outline: none;
+}
+.input:hover{
+    background: gray;
+    border: 2px solid green;
+}
+.input:focus{
+    background: burlywood;
+    border: 2px solid green;
+}
